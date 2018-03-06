@@ -43,7 +43,11 @@ function readConfiguration(string $path): array
     try {
         return Yaml::parse(file_get_contents($path));
     } catch (ParseException $exception) {
-        throw new \InvalidArgumentException(sprintf('File "%s" does not contain valid YAML', $path));
+        throw new \InvalidArgumentException(
+            sprintf('File "%s" does not contain valid YAML', $path),
+            $exception->getCode(),
+            $exception
+        );
     }
 }
 
